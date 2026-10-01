@@ -1,0 +1,70 @@
+body {
+  margin: 0;
+  font-family: "Yu Gothic", "Meiryo", sans-serif;
+  background-color: #f4f8f7;
+  color: #333;
+}
+
+header {
+  background-color: #2f7d78;
+  color: white;
+  padding: 24px;
+  text-align: center;
+}
+
+main {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.card {
+  background-color: white;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+h1 {
+  margin: 0;
+}
+
+h2 {
+  color: #2f7d78;
+}
+label {
+  display: inline-block;
+  width: 180px;
+  font-weight: bold;
+}
+
+input,
+select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+input {
+  width: 120px;
+}
+
+select {
+  width: 160px;
+}
+button {
+  background-color: #2f7d78;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #256963;
+}

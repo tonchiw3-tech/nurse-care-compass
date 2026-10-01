@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nurse Care Compass</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>Nurse Care Compass</h1>
+    <p>看護師の健康と働き方を支えるアプリ</p>
+  </header>
+
+  <main>
+  <div class="card">
+  <h2>今日の健康状態</h2>
+
+  <label>睡眠時間</label>
+  <input id="sleep-hours" type="number" min="0" max="24" step="0.5" placeholder="例：6"> 時間
+
+  <br><br>
+
+  <label>疲労感</label>
+  <select>
+    <option>少ない</option>
+    <option>普通</option>
+    <option>強い</option>
+  </select>
+
+  <br><br>
+
+  <label>休憩は取れましたか？</label>
+  <select>
+    <option>はい</option>
+    <option>いいえ</option>
+  </select>
+
+  <br><br>
+
+  <label>腰痛</label>
+  <select>
+    <option>なし</option>
+    <option>あり</option>
+  </select>
+
+  <br><br>
+  <button onclick="recordHealth()">今日の状態を記録する</button>
+  <p id="result"></p>
+</div>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
