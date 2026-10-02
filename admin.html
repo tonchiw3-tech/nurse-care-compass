@@ -35,6 +35,39 @@
       <article class="summary-card summary-card-warm"><span>休息の確認が必要</span><strong id="rest-count">-</strong><small>名</small></article>
     </section>
 
+    <section class="reminder-panel" aria-labelledby="reminder-title">
+      <div>
+        <p class="eyebrow">REMINDERS</p>
+        <h2 id="reminder-title">今日・明日のリマインド</h2>
+      </div>
+      <div id="reminder-list" class="reminder-list" aria-live="polite"></div>
+    </section>
+
+    <section class="admin-card schedule-card" aria-labelledby="schedule-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">INTERVIEW SCHEDULE</p>
+          <h2 id="schedule-title">面談スケジュール</h2>
+        </div>
+        <div class="schedule-counts" aria-label="面談件数">
+          <span>本日の面談 <strong id="today-schedule-count">0</strong>件</span>
+          <span>今週の面談 <strong id="week-schedule-count">0</strong>件</span>
+        </div>
+      </div>
+      <div class="schedule-toolbar">
+        <div class="schedule-tabs" role="tablist" aria-label="面談予定の表示区分">
+          <button type="button" class="schedule-tab is-active" data-schedule-range="today">今日</button>
+          <button type="button" class="schedule-tab" data-schedule-range="week">今週</button>
+          <button type="button" class="schedule-tab" data-schedule-range="month">今月</button>
+        </div>
+        <p class="schedule-legend"><span class="legend-dot legend-today"></span>今日 <span class="legend-dot legend-tomorrow"></span>明日 <span class="legend-dot legend-week"></span>今週 <span class="legend-dot legend-overdue"></span>期限超過</p>
+      </div>
+      <div id="schedule-list" class="schedule-list" aria-live="polite"></div>
+      <div class="calendar-heading"><h3 id="calendar-title">月間カレンダー</h3><div><button type="button" class="calendar-nav" id="calendar-prev" aria-label="前月">‹</button><button type="button" class="calendar-nav" id="calendar-next" aria-label="翌月">›</button></div></div>
+      <div id="schedule-calendar" class="schedule-calendar" aria-label="面談予定カレンダー"></div>
+      <div id="calendar-day-detail" class="calendar-day-detail" aria-live="polite"></div>
+    </section>
+
     <section class="admin-card" aria-labelledby="staff-list-title">
       <div class="section-heading">
         <div>
@@ -86,6 +119,7 @@
     </section>
   </main>
 
+  <script src="auth.js"></script><script>if (!NCCAuth.requireRole("ADMIN")) document.body.hidden = true;</script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="admin.js"></script>
 </body>

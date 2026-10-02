@@ -1,0 +1,17 @@
+{
+  "name": "Nurse Care Compass",
+  "short_name": "Care Compass",
+  "description": "看護師・看護学生の毎日のセルフケア記録アプリ",
+  "lang": "ja",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#ff4f87",
+  "background_color": "#fff8fc",
+  "icons": [{
+    "src": "icons/icon.svg",
+    "sizes": "any",
+    "type": "image/svg+xml",
+    "purpose": "any maskable"
+  }]
+}

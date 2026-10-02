@@ -2,88 +2,52 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#ff4f87">
+  <meta name="description" content="看護師・看護学生の毎日のセルフケア記録アプリ">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon.svg">
   <title>Nurse Care Compass</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
-
-  <header>
-    <h1>Nurse Care Compass</h1>
-    <p>看護師の健康と働き方を支えるアプリ</p>
-    <a class="admin-link" href="admin.html">管理者向けサポート画面</a>
+<body class="app-page">
+  <header class="app-header">
+    <div class="app-header-inner">
+      <div><p class="app-kicker">NURSE CARE COMPASS</p><h1>今日も、自分をケアしよう <span aria-hidden="true">✦</span></h1><p>看護師・看護学生のための毎日セルフケア</p></div>
+      <a class="admin-link" href="admin.html">管理者向け画面</a>
+    </div>
   </header>
 
-  <main>
-  <div class="card">
-  <div class="section-kicker">STAFF SELF-CARE</div>
-  <h2>今日の勤務と体調</h2>
-  <p class="helper-text">勤務の振り返りとセルフケアのための記録です。診断や評価を行うものではありません。</p>
-
-  <div class="form-grid">
-  <div class="form-field"><label for="shift-type">勤務区分</label>
-  <select id="shift-type"><option>日勤</option><option>夜勤</option><option>準夜勤</option><option>深夜勤</option><option>休日</option></select></div>
-  <div class="form-field"><label for="overtime">超過勤務時間</label><div><input id="overtime" type="number" min="0" max="24" step="0.5" placeholder="例：1"> 時間</div></div>
-  </div>
-
-  <div class="form-grid">
-  <div class="form-field"><label for="break-taken">休憩は取れましたか？</label>
-  <select id="break-taken"><option>はい</option><option>いいえ</option></select></div>
-  <div class="form-field nap-field"><label for="nap-hours">夜勤中の仮眠</label><div class="input-with-help"><div><input id="nap-hours" type="number" min="0" max="24" step="0.5" placeholder="例：1.5"> 時間</div><small id="nap-help">夜勤以外は入力不要です</small></div></div>
-  <div class="form-field"><label for="sleep-hours">睡眠時間</label><div><input id="sleep-hours" type="number" min="0" max="24" step="0.5" placeholder="例：6"> 時間</div></div>
-  <div class="form-field"><label for="fatigue">疲労感</label><select id="fatigue"><option>少ない</option><option>普通</option><option>強い</option></select></div>
-  <div class="form-field"><label for="back-pain">腰痛</label><select id="back-pain"><option>なし</option><option>あり</option></select></div>
-  <fieldset class="form-field mental-state-field">
-    <legend>今日の気分・こころの状態</legend>
-    <div class="choice-grid">
-      <label><input type="checkbox" name="mental-state" value="落ち着いている">落ち着いている</label>
-      <label><input type="checkbox" name="mental-state" value="少し疲れている">少し疲れている</label>
-      <label><input type="checkbox" name="mental-state" value="気持ちが重い">気持ちが重い</label>
-      <label><input type="checkbox" name="mental-state" value="イライラしている">イライラしている</label>
-      <label><input type="checkbox" name="mental-state" value="不安がある">不安がある</label>
-      <label><input type="checkbox" name="mental-state" value="集中しにくい">集中しにくい</label>
-      <label><input type="checkbox" name="mental-state" value="何もしたくない">何もしたくない</label>
-    </div>
-  </fieldset>
-  <fieldset class="form-field sharing-options" aria-describedby="sharing-help">
-    <legend>管理者への共有</legend>
-    <div class="choice-grid">
-      <label><input id="consultation-request" type="checkbox" name="consultation-request">管理者に相談したい</label>
-      <label><input id="share-mental-state" type="checkbox" name="share-mental-state">この内容を管理者に共有する</label>
-    </div>
-    <p id="sharing-help" class="privacy-help">選択しない限り、今日の気分・こころの状態は本人だけの記録として保存されます。</p>
-  </fieldset>
-  <div class="form-field"><label for="recovery">勤務後の回復感</label><select id="recovery"><option>回復している</option><option>普通</option><option>回復しにくい</option></select></div>
-  </div>
-  <section class="memo-card" aria-labelledby="memo-heading">
-    <div class="memo-heading">
-      <div>
-        <h3 id="memo-heading">今日のひとこと</h3>
-        <p>今日あったことや、感じたことを自由に残してみましょう。</p>
+  <main class="app-main">
+    <section id="today" class="app-section today-section" aria-labelledby="today-heading">
+      <div class="section-heading-row"><div><p class="section-kicker">TODAY</p><h2 id="today-heading">今日の勤務と体調</h2></div><span class="date-chip">毎日の記録</span></div>
+      <p class="helper-text">勤務の振り返りとセルフケアのための記録です。診断や評価を行うものではありません。</p>
+      <div class="form-grid">
+        <div class="form-field"><label for="shift-type">勤務区分</label><select id="shift-type"><option>日勤</option><option>夜勤</option><option>準夜勤</option><option>深夜勤</option><option>休日</option></select></div>
+        <div class="form-field"><label for="overtime">超過勤務時間</label><div class="unit-input"><input id="overtime" type="number" min="0" max="24" step="0.5" placeholder="例：1"><span>時間</span></div></div>
+        <div class="form-field"><label for="break-taken">休憩</label><select id="break-taken"><option>はい</option><option>いいえ</option></select></div>
+        <div class="form-field nap-field"><label for="nap-hours">夜勤中の仮眠</label><div class="input-with-help"><div class="unit-input"><input id="nap-hours" type="number" min="0" max="24" step="0.5" placeholder="例：1.5"><span>時間</span></div><small id="nap-help">夜勤以外は入力不要です</small></div></div>
+        <div class="form-field"><label for="sleep-hours">睡眠時間</label><div class="unit-input"><input id="sleep-hours" type="number" min="0" max="24" step="0.5" placeholder="例：6"><span>時間</span></div></div>
+        <div class="form-field"><label for="fatigue">疲労感</label><select id="fatigue"><option>少ない</option><option>普通</option><option>強い</option></select></div>
+        <div class="form-field"><label for="back-pain">腰痛</label><select id="back-pain"><option>なし</option><option>あり</option></select></div>
       </div>
-      <span class="memo-emoji" aria-hidden="true">✦</span>
-    </div>
-    <textarea id="daily-note" rows="3" maxlength="200" placeholder="例：急変があった、今日は疲れた、うれしいことがあった"></textarea>
-    <div class="memo-actions">
-      <button id="voice-input" type="button" class="voice-button" aria-describedby="voice-status"><span aria-hidden="true">🎙</span> 音声で入力</button>
-      <span id="voice-status" class="voice-status" role="status" aria-live="polite"></span>
-    </div>
-  </section>
-  <button onclick="recordHealth()">今日の勤務と体調を記録する</button>
-  <p id="result"></p>
-  <h3>記録履歴</h3>
-<div id="history"></div>
-<h3>直近30日のセルフケア集計</h3>
-<div id="monthly-summary" class="metric-grid"></div>
-<h3>1年間の睡眠推移</h3>
-<div class="chart-container">
-  <canvas id="sleep-chart" aria-label="過去12か月の平均睡眠時間"></canvas>
-</div>
-<p id="chart-empty-months" class="chart-note"></p>
-</div>
-</main>
+      <fieldset class="form-field mental-state-field"><legend>今日の気分・こころの状態</legend><div class="choice-grid">
+        <label><input type="checkbox" name="mental-state" value="落ち着いている">落ち着いている</label><label><input type="checkbox" name="mental-state" value="少し疲れている">少し疲れている</label><label><input type="checkbox" name="mental-state" value="気持ちが重い">気持ちが重い</label><label><input type="checkbox" name="mental-state" value="イライラしている">イライラしている</label><label><input type="checkbox" name="mental-state" value="不安がある">不安がある</label><label><input type="checkbox" name="mental-state" value="集中しにくい">集中しにくい</label><label><input type="checkbox" name="mental-state" value="何もしたくない">何もしたくない</label>
+      </div></fieldset>
+      <section class="memo-card" aria-labelledby="memo-heading"><div class="memo-heading"><div><h3 id="memo-heading">今日のひとこと</h3><p>今日あったことや、感じたことを自由に残してみましょう。</p></div><span class="memo-emoji" aria-hidden="true">✦</span></div><textarea id="daily-note" rows="3" maxlength="200" placeholder="例：急変があった、今日は疲れた、うれしいことがあった"></textarea><div class="memo-actions"><button id="voice-input" type="button" class="voice-button" aria-describedby="voice-status"><span aria-hidden="true">🎙</span> 音声で入力</button><span id="voice-status" class="voice-status" role="status" aria-live="polite"></span></div></section>
+      <details class="sharing-options"><summary>管理者への共有設定</summary><div class="choice-grid"><label><input id="consultation-request" type="checkbox" name="consultation-request">管理者に相談したい</label><label><input id="share-mental-state" type="checkbox" name="share-mental-state">気分・こころの状態を管理者に共有する</label><label><input id="share-daily-note" type="checkbox" name="share-daily-note">今日のひとことを管理者に共有する</label></div><p id="sharing-help" class="privacy-help">未選択の気分・こころの状態、今日のひとこと、その他の非共有内容は本人だけが閲覧できます。「管理者に相談したい」は具体的な内容を公開せず、管理者には相談希望ありだけを表示します。</p></details>
+      <div class="recovery-row"><label for="recovery">勤務後の回復感</label><select id="recovery"><option>回復している</option><option>普通</option><option>回復しにくい</option></select></div>
+      <button class="record-button" onclick="recordHealth()"><span aria-hidden="true">＋</span> 今日の記録を保存する</button><p id="result" role="status" aria-live="polite"></p>
+    </section>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="script.js"></script>
+    <section id="records" class="app-section" aria-labelledby="records-heading"><div class="section-heading-row"><div><p class="section-kicker">RECORDS</p><h2 id="records-heading">記録</h2></div><span class="section-icon pink" aria-hidden="true">♥</span></div><p class="section-lead">過去1年分の記録をこの端末に保存しています。</p><div id="history"></div></section>
+    <section id="graphs" class="app-section" aria-labelledby="graphs-heading"><div class="section-heading-row"><div><p class="section-kicker">INSIGHTS</p><h2 id="graphs-heading">グラフ</h2></div><span class="section-icon turquoise" aria-hidden="true">↗</span></div><h3>直近30日のセルフケア集計</h3><div id="monthly-summary" class="metric-grid"></div><h3>1年間の睡眠推移</h3><div class="chart-container"><canvas id="sleep-chart" aria-label="過去12か月の平均睡眠時間"></canvas></div><p id="chart-empty-months" class="chart-note"></p></section>
+    <section id="consultation" class="app-section consultation-section" aria-labelledby="consultation-heading"><div class="section-heading-row"><div><p class="section-kicker">SUPPORT</p><h2 id="consultation-heading">相談</h2></div><span class="section-icon lavender" aria-hidden="true">♡</span></div><p>記録を続けていて気になることや、管理者に相談したいことがあれば、今日の記録から「管理者に相談したい」を選んでください。</p><a class="support-link" href="#today">今日の記録で相談希望を設定する <span aria-hidden="true">→</span></a></section>
+    <section id="mypage" class="app-section mypage-section" aria-labelledby="mypage-heading"><div class="section-heading-row"><div><p class="section-kicker">MY PAGE</p><h2 id="mypage-heading">マイページ</h2></div><span class="section-icon yellow" aria-hidden="true">★</span></div><p>プロフィールや通知設定など、これから追加できるスペースです。</p><p class="privacy-note">記録はこの端末のブラウザ内に保存されています。</p></section>
+  </main>
+  <nav class="bottom-nav" aria-label="メインナビゲーション"><a href="#today" class="nav-item is-active"><span aria-hidden="true">☀</span><span>今日</span></a><a href="#records" class="nav-item"><span aria-hidden="true">▣</span><span>記録</span></a><a href="#graphs" class="nav-item"><span aria-hidden="true">⌁</span><span>グラフ</span></a><a href="#consultation" class="nav-item"><span aria-hidden="true">♡</span><span>相談</span></a><a href="#mypage" class="nav-item"><span aria-hidden="true">●</span><span>マイページ</span></a></nav>
+  <script src="auth.js"></script><script>if (!NCCAuth.requireRole("STAFF")) document.body.hidden = true;</script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script><script src="script.js"></script>
 </body>
 </html>

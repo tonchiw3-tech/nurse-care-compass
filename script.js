@@ -4,13 +4,18 @@ const napInput = document.getElementById("nap-hours");
 const dailyNoteInput = document.getElementById("daily-note");
 let sleepChart;
 
+// DEMO ONLY: browser storage isolation is not production authorization.
+// Future Spring Boot APIs must repeat STAFF ownership checks on the server.
+const currentSession = NCCAuth.getSession();
+const historyStorageKey = NCCAuth.getHealthHistoryKey();
+
 document.querySelectorAll('input[type="number"]').forEach((input) => input.addEventListener("keydown", (event) => {
   if (event.key === "-") event.preventDefault();
 }));
 
 const valueOf = (id) => document.getElementById(id).value;
 const valuesOf = (name) => Array.from(document.querySelectorAll(`input[name="${name}"]:checked`), (input) => input.value);
-const readHistory = () => { try { return JSON.parse(localStorage.getItem("healthHistory")) || []; } catch { return []; } };
+const readHistory = () => { try { return JSON.parse(localStorage.getItem(historyStorageKey)) || []; } catch { return []; } };
 const isNightShift = (shift) => ["夜勤", "準夜勤", "深夜勤"].includes(shift);
 
 function updateNapAvailability() {
@@ -29,16 +34,18 @@ function recordHealth() {
   const mentalState = valuesOf("mental-state");
   const consultationRequested = document.getElementById("consultation-request").checked || mentalState.includes("相談したい");
   const shareMentalState = document.getElementById("share-mental-state").checked;
+  const shareDailyNote = document.getElementById("share-daily-note").checked;
   const record = {
+    id: `${currentSession.id}-${Date.now()}`, ownerId: currentSession.id,
     date: new Date().toLocaleString("ja-JP"), sleep: sleepInput.value,
     shiftType: valueOf("shift-type"),
     overtime: valueOf("overtime") || "0", breakTaken: valueOf("break-taken"), napHours: valueOf("nap-hours") || "0",
     fatigue: valueOf("fatigue"), backPain: valueOf("back-pain"), mentalState, recovery: valueOf("recovery"),
     consultation: consultationRequested ? "あり" : "なし", consultationRequested, shareMentalState,
-    dailyNote: dailyNoteInput.value.trim()
+    dailyNote: dailyNoteInput.value.trim(), shareDailyNote
   };
   const history = readHistory(); history.unshift(record);
-  localStorage.setItem("healthHistory", JSON.stringify(getRecentHistory(history)));
+  localStorage.setItem(historyStorageKey, JSON.stringify(getRecentHistory(history)));
   document.getElementById("result").textContent = `記録しました：${record.shiftType}／睡眠 ${record.sleep}時間／疲労感 ${record.fatigue}`;
   showHistory();
 }
@@ -73,7 +80,7 @@ function updateMonthlySummary(history) {
 }
 
 function showHistory() {
-  const history = getRecentHistory(readHistory()); localStorage.setItem("healthHistory", JSON.stringify(history));
+  const history = getRecentHistory(readHistory()); localStorage.setItem(historyStorageKey, JSON.stringify(history));
   const area = document.getElementById("history"); area.innerHTML = "";
   history.forEach((record) => {
     const item = document.createElement("p");
@@ -117,4 +124,20 @@ if (!SpeechRecognition) {
     voiceButton.disabled = false;
     voiceStatus.textContent = event.error === "not-allowed" ? "マイクの使用を許可してください" : "音声を認識できませんでした";
   });
+}
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => navigator.serviceWorker.register("service-worker.js").catch(() => {}));
+}
+
+const navItems = Array.from(document.querySelectorAll(".nav-item"));
+const sections = Array.from(document.querySelectorAll(".app-section"));
+const setActiveNav = (id) => navItems.forEach((item) => item.classList.toggle("is-active", item.getAttribute("href") === `#${id}`));
+navItems.forEach((item) => item.addEventListener("click", () => setActiveNav(item.getAttribute("href").slice(1))));
+if ("IntersectionObserver" in window) {
+  const navObserver = new IntersectionObserver((entries) => {
+    const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    if (visible) setActiveNav(visible.target.id);
+  }, { rootMargin: "-15% 0px -65% 0px", threshold: [0.1, 0.4, 0.8] });
+  sections.forEach((section) => navObserver.observe(section));
 }

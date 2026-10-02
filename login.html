@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ログイン | Nurse Care Compass</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="login-page">
+  <main class="login-card">
+    <p class="eyebrow">NURSE CARE COMPASS</p>
+    <h1>ログイン</h1>
+    <p class="login-lead">健康記録はログイン中の本人だけに紐づきます。管理者画面は `role=ADMIN` のユーザーだけが利用できます。</p>
+    <div class="demo-warning" role="note"><strong>試作版の注意</strong><br>これはダミー認証です。本番用のセキュリティではありません。</div>
+    <form id="login-form" class="login-form">
+      <label for="account">アカウント</label>
+      <select id="account">
+        <option value="staff">スタッフ（デモ）</option>
+        <option value="admin">管理者（デモ）</option>
+      </select>
+      <label for="password">パスワード</label>
+      <input id="password" type="password" autocomplete="current-password" required>
+      <p class="demo-credentials">スタッフ: `staff`　管理者: `admin`</p>
+      <button type="submit">ログイン</button>
+      <p id="login-error" class="login-error" role="alert"></p>
+    </form>
+  </main>
+  <script src="auth.js"></script>
+  <script>
+    document.getElementById("login-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      const ok = NCCAuth.login(document.getElementById("account").value, document.getElementById("password").value);
+      if (!ok) { document.getElementById("login-error").textContent = "アカウントまたはパスワードが違います。"; return; }
+      window.location.href = document.getElementById("account").value === "admin" ? "admin.html" : "index.html";
+    });
+  </script>
+</body>
+</html>
