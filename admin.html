@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>サポートダッシュボード | Nurse Care Compass</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="admin-page">
+  <header class="admin-header">
+    <div class="admin-header-inner">
+      <div>
+        <p class="eyebrow">Nurse Care Compass</p>
+        <h1>スタッフサポートダッシュボード</h1>
+        <p>日々の健康管理を支え、面談やフォローにつなげるための画面です。</p>
+      </div>
+      <a class="back-link" href="index.html">スタッフ用画面へ</a>
+    </div>
+  </header>
+
+  <main class="admin-main">
+    <section class="intro-panel" aria-labelledby="dashboard-title">
+      <div>
+        <p class="eyebrow">SUPPORT OVERVIEW</p>
+        <h2 id="dashboard-title">今月のサポート状況</h2>
+        <p class="muted">記録は本人の健康管理と対話を支援する目的で使用します。必要以上の個人情報は表示していません。</p>
+      </div>
+      <div class="last-updated">最終更新：2026年10月2日</div>
+    </section>
+
+    <section class="summary-grid" aria-label="サポート状況の概要">
+      <article class="summary-card"><span>登録スタッフ</span><strong id="staff-count">-</strong><small>名</small></article>
+      <article class="summary-card"><span>相談希望あり</span><strong id="support-count">-</strong><small>名</small></article>
+      <article class="summary-card"><span>面談・対話予定</span><strong id="follow-count">-</strong><small>件</small></article>
+      <article class="summary-card summary-card-warm"><span>休息の確認が必要</span><strong id="rest-count">-</strong><small>名</small></article>
+    </section>
+
+    <section class="admin-card" aria-labelledby="staff-list-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">STAFF SUPPORT LIST</p>
+          <h2 id="staff-list-title">スタッフ一覧</h2>
+        </div>
+        <label class="filter-label" for="staff-filter">表示を絞り込む
+          <select id="staff-filter">
+            <option value="all">すべて</option>
+            <option value="consultation">相談希望あり</option>
+            <option value="followup">フォロー予定あり</option>
+            <option value="rest">休息の確認が必要</option>
+          </select>
+        </label>
+      </div>
+      <p class="table-note">数値は直近30日間の記録をもとにした目安です。気になる変化は、本人の意向を確認しながら対話に活用してください。</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">表示名</th>
+              <th scope="col">平均睡眠時間<br><span>直近1か月</span></th>
+              <th scope="col">休憩取得率<br><span>直近1か月</span></th>
+              <th scope="col">超過勤務<br><span>時間</span></th>
+              <th scope="col">夜勤回数<br><span>直近1か月</span></th>
+              <th scope="col">疲労感の傾向</th>
+              <th scope="col">休憩なし<br><span>日数</span></th>
+              <th scope="col">腰痛あり<br><span>日数</span></th>
+              <th scope="col">相談希望</th>
+              <th scope="col">最終面談日</th>
+              <th scope="col">次回フォロー</th>
+              <th scope="col"><span class="sr-only">詳細</span></th>
+            </tr>
+          </thead>
+          <tbody id="staff-table-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="admin-card detail-card" aria-labelledby="detail-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">INDIVIDUAL SUPPORT VIEW</p>
+          <h2 id="detail-title">個人の健康傾向</h2>
+        </div>
+        <span class="privacy-label">本人支援のための参考情報</span>
+      </div>
+      <div id="staff-detail"></div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

@@ -11,46 +11,79 @@
   <header>
     <h1>Nurse Care Compass</h1>
     <p>看護師の健康と働き方を支えるアプリ</p>
+    <a class="admin-link" href="admin.html">管理者向けサポート画面</a>
   </header>
 
   <main>
   <div class="card">
-  <h2>今日の健康状態</h2>
+  <div class="section-kicker">STAFF SELF-CARE</div>
+  <h2>今日の勤務と体調</h2>
+  <p class="helper-text">勤務の振り返りとセルフケアのための記録です。診断や評価を行うものではありません。</p>
 
-  <label>睡眠時間</label>
-  <input id="sleep-hours" type="number" min="0" max="24" step="0.5" placeholder="例：6"> 時間
+  <div class="form-grid">
+  <div class="form-field"><label for="shift-type">勤務区分</label>
+  <select id="shift-type"><option>日勤</option><option>夜勤</option><option>準夜勤</option><option>深夜勤</option><option>休日</option></select></div>
+  <div class="form-field"><label for="overtime">超過勤務時間</label><div><input id="overtime" type="number" min="0" max="24" step="0.5" placeholder="例：1"> 時間</div></div>
+  </div>
 
-  <br><br>
-
-  <label>疲労感</label>
-  <select>
-    <option>少ない</option>
-    <option>普通</option>
-    <option>強い</option>
-  </select>
-
-  <br><br>
-
-  <label>休憩は取れましたか？</label>
-  <select>
-    <option>はい</option>
-    <option>いいえ</option>
-  </select>
-
-  <br><br>
-
-  <label>腰痛</label>
-  <select>
-    <option>なし</option>
-    <option>あり</option>
-  </select>
-
-  <br><br>
-  <button onclick="recordHealth()">今日の状態を記録する</button>
+  <div class="form-grid">
+  <div class="form-field"><label for="break-taken">休憩は取れましたか？</label>
+  <select id="break-taken"><option>はい</option><option>いいえ</option></select></div>
+  <div class="form-field nap-field"><label for="nap-hours">夜勤中の仮眠</label><div class="input-with-help"><div><input id="nap-hours" type="number" min="0" max="24" step="0.5" placeholder="例：1.5"> 時間</div><small id="nap-help">夜勤以外は入力不要です</small></div></div>
+  <div class="form-field"><label for="sleep-hours">睡眠時間</label><div><input id="sleep-hours" type="number" min="0" max="24" step="0.5" placeholder="例：6"> 時間</div></div>
+  <div class="form-field"><label for="fatigue">疲労感</label><select id="fatigue"><option>少ない</option><option>普通</option><option>強い</option></select></div>
+  <div class="form-field"><label for="back-pain">腰痛</label><select id="back-pain"><option>なし</option><option>あり</option></select></div>
+  <fieldset class="form-field mental-state-field">
+    <legend>今日の気分・こころの状態</legend>
+    <div class="choice-grid">
+      <label><input type="checkbox" name="mental-state" value="落ち着いている">落ち着いている</label>
+      <label><input type="checkbox" name="mental-state" value="少し疲れている">少し疲れている</label>
+      <label><input type="checkbox" name="mental-state" value="気持ちが重い">気持ちが重い</label>
+      <label><input type="checkbox" name="mental-state" value="イライラしている">イライラしている</label>
+      <label><input type="checkbox" name="mental-state" value="不安がある">不安がある</label>
+      <label><input type="checkbox" name="mental-state" value="集中しにくい">集中しにくい</label>
+      <label><input type="checkbox" name="mental-state" value="何もしたくない">何もしたくない</label>
+    </div>
+  </fieldset>
+  <fieldset class="form-field sharing-options" aria-describedby="sharing-help">
+    <legend>管理者への共有</legend>
+    <div class="choice-grid">
+      <label><input id="consultation-request" type="checkbox" name="consultation-request">管理者に相談したい</label>
+      <label><input id="share-mental-state" type="checkbox" name="share-mental-state">この内容を管理者に共有する</label>
+    </div>
+    <p id="sharing-help" class="privacy-help">選択しない限り、今日の気分・こころの状態は本人だけの記録として保存されます。</p>
+  </fieldset>
+  <div class="form-field"><label for="recovery">勤務後の回復感</label><select id="recovery"><option>回復している</option><option>普通</option><option>回復しにくい</option></select></div>
+  </div>
+  <section class="memo-card" aria-labelledby="memo-heading">
+    <div class="memo-heading">
+      <div>
+        <h3 id="memo-heading">今日のひとこと</h3>
+        <p>今日あったことや、感じたことを自由に残してみましょう。</p>
+      </div>
+      <span class="memo-emoji" aria-hidden="true">✦</span>
+    </div>
+    <textarea id="daily-note" rows="3" maxlength="200" placeholder="例：急変があった、今日は疲れた、うれしいことがあった"></textarea>
+    <div class="memo-actions">
+      <button id="voice-input" type="button" class="voice-button" aria-describedby="voice-status"><span aria-hidden="true">🎙</span> 音声で入力</button>
+      <span id="voice-status" class="voice-status" role="status" aria-live="polite"></span>
+    </div>
+  </section>
+  <button onclick="recordHealth()">今日の勤務と体調を記録する</button>
   <p id="result"></p>
+  <h3>記録履歴</h3>
+<div id="history"></div>
+<h3>直近30日のセルフケア集計</h3>
+<div id="monthly-summary" class="metric-grid"></div>
+<h3>1年間の睡眠推移</h3>
+<div class="chart-container">
+  <canvas id="sleep-chart" aria-label="過去12か月の平均睡眠時間"></canvas>
+</div>
+<p id="chart-empty-months" class="chart-note"></p>
 </div>
 </main>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
